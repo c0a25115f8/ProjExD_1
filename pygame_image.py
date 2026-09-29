@@ -9,6 +9,7 @@ def main():
     pg.display.set_caption("はばたけ！こうかとん")
     screen = pg.display.set_mode((800, 600))
     clock  = pg.time.Clock()
+
     bg_img = pg.image.load("fig/pg_bg.jpg")
     bg_flip = pg.transform.flip(bg_img, True, False)
 
@@ -24,14 +25,20 @@ def main():
             if event.type == pg.QUIT: return
 
         key_lst = pg.key.get_pressed()
+
+        x_step = -1
+        y_step = 0
+
         if key_lst[pg.K_UP]:
-            kk_rct.move_ip(0, -3)
+            y_step = -1
         if key_lst[pg.K_DOWN]:
-            kk_rct.move_ip(0, 3)
+            y_step = 1
         if key_lst[pg.K_LEFT]:
-            kk_rct.move_ip(-3, 0)
+            x_step = -2
         if key_lst[pg.K_RIGHT]:
-            kk_rct.move_ip(3, 0)
+            x_step = 2
+
+        kk_rct.move_ip(x_step, y_step)
         
         x = tmr % 3200
 
@@ -44,7 +51,7 @@ def main():
 
         pg.display.update()
         tmr += 1        
-        clock.tick(200)
+        clock.tick(100)
 
 
 if __name__ == "__main__":
